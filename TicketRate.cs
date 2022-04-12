@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Application_CW1
 {
 
-    class TicketRate
+    public class TicketRate
     {
         public string title { get; set; }
         public int rateForOneHrs { get; set; }

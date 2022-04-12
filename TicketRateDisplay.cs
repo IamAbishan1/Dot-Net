@@ -17,31 +17,14 @@ namespace Application_CW1
         public TicketRateDisplay()
         {
             InitializeComponent();
-            showTicketRate();
+           showTicketRate();
         }
 
         public void showTicketRate()
         {
-            List<TicketRate> TicketRateList = new List<TicketRate>();
-            string[] RateList = File.ReadAllLines(filePath);
-            foreach (string s in RateList)
-            {
-                string[] st = s.Split(',');
-                if (st.Length != 6) continue;
-
-                TicketRate tr = new TicketRate();
-                tr.title = st[0];
-                tr.rateForOneHrs = Convert.ToInt32(st[1]);
-                tr.rateForTwoHrs = Convert.ToInt32(st[2]);
-                tr.rateForThreeHrs = Convert.ToInt32(st[3]);
-                tr.rateForFourHrs = Convert.ToInt32(st[4]);
-                tr.rateForWholeDay = Convert.ToInt32(st[5]);
-                TicketRateList.Add(tr);
-
-            }
-            ticketRateGV.DataSource = TicketRateList;
-
-
+            ticketRateGV.DataSource = null;
+            if(GlobalValues.IsWeekEnd) ticketRateGV.DataSource = GlobalValues.TicketRateListWE;
+            else ticketRateGV.DataSource = GlobalValues.TicketRateListWD;
 
         }
 
@@ -49,17 +32,91 @@ namespace Application_CW1
         {
 
         }
+        public void setUser()
+        {
+            if (GlobalValues.IsAdmin)
+            {
+                userL.Text = "Admin";
+                logInB.Text = "Log Out";
+                
+            }
 
+            else
+            {
+                userL.Text = "Staff";
+                logInB.Text = "Log In";
+            }
+
+        }
+
+        private void setWeekType()
+        {
+            if (GlobalValues.IsWeekEnd) weekB.Text = "WeekEnd";
+            else weekB.Text = "WeekDay";
+
+
+        }
         private void TicketRateDisplay_Load(object sender, EventArgs e)
         {
-            ticketRateCB.SelectedIndex = 0;
-            showTicketRate();
+            setWeekType();
+            setUser();
         }
 
         private void UpdateRate_Click(object sender, EventArgs e)
         {
-            //read data from gridview
-            //write data to file (overwrite)
+            if (GlobalValues.IsAdmin)
+            {
+
+                TextWriter writer = new StreamWriter(filePath);
+                for (int i = 0; i < ticketRateGV.Rows.Count; i++)
+                {
+                    for (int j = 0; j < ticketRateGV.Columns.Count; j++)
+                    {
+                        writer.Write(ticketRateGV.Rows[i].Cells[j].Value.ToString());
+                        if (j < ticketRateGV.Columns.Count - 1)
+                        {
+                            writer.Write(",");
+                        }
+                    }
+                    writer.WriteLine("");
+                }
+                writer.Close();
+                MessageBox.Show("The ticketRate has been updated.");
+            }
+            else
+            {
+                MessageBox.Show("You do not have permission to make update here.");
+            }
+        }
+
+        private void finishB_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void logInB_Click(object sender, EventArgs e)
+        {
+            if (String.Equals(logInB.Text, "Log In"))
+            {
+                LogIn login = new LogIn();
+                this.Close();
+                login.Show();
+            }
+            else
+            {
+                this.Close();
+                GlobalValues.IsAdmin = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ticketRateGV.DataSource = GlobalValues.TicketRateListWD;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ticketRateGV.DataSource = GlobalValues.TicketRateListWE;
         }
     }
 }

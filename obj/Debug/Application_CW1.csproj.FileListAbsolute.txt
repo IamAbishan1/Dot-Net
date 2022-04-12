@@ -9,7 +9,11 @@ C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.csproj.Core
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.exe
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.pdb
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.LogIn.resources
-C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.TicketListDisplay.resources
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.VisitorEntry.resources
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.VisitorExit.resources
 C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.TicketRateDisplay.resources
+C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.Report.resources
+C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.DailyReport.resources
+C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.OverAllReport.resources
+C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.WeeklyReport.resources
+C:\Users\dell\source\repos\Application_CW1\obj\Debug\Application_CW1.VisitorDetail.resources
